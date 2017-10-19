@@ -1,0 +1,34 @@
+# 3 services
+version: "3.1"
+services:
+
+    mariadb:
+        image: mariadb
+        container_name: tp-appli-mariadb
+        environment:
+            - MYSQL_ROOT_PASSWORD=tp-user
+            - MYSQL_DATABASE=tp-appli-db
+            - MYSQL_USER=tp-user
+            - MYSQL_PASSWORD=tp-user
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: tp-phpmyadmin
+        ports:
+            - "9191:80"
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=tp-user
+            - MYSQL_PASSWORD=tp-user
+        links: 
+            - mariadb:db
+
+    wordpress:
+        image: wordpress
+        container_name: tp-wordpress
+        ports:
+            - "6293:80"
+        environment:
+            - WORDPRESS_DB_PASSWORD=tp-user
+        links: 
+            - mariadb:mysql
