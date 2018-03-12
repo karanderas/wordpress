@@ -20,7 +20,7 @@ services:
             - MYSQL_ROOT_PASSWORD=root
             - MYSQL_USER=tp-user
             - MYSQL_PASSWORD=tp-user
-        links: 
+        links:
             - mariadb:db
 
     wordpress:
@@ -30,5 +30,6 @@ services:
             - "6293:80"
         environment:
             - WORDPRESS_DB_PASSWORD=tp-user
-        links: 
+        links:
             - mariadb:mysql
+
